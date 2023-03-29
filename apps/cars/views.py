@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, get_object_or_404
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 from .models import CarModel
@@ -13,15 +13,6 @@ class CarsGetPost(GenericAPIView):
         car = CarModel.objects.all()
         serializer = CarSerializer(car, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
-
-    def post(self, *args, **kwargs):
-        data = self.request.data
-
-        serializer = CarSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(serializer.data, status.HTTP_201_CREATED)
 
 
 class CarRetrieveUpdateDelete(GenericAPIView):

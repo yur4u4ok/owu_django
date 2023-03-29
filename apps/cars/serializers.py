@@ -6,4 +6,5 @@ from .models import CarModel
 class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
-        fields = ('id', 'car_brand', 'year', 'created_at', 'updated_at')
+        fields = ('id', 'car_brand', 'year', 'created_at', 'updated_at', 'auto_park')
+        read_only_fields = ('auto_park', )
