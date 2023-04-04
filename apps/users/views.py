@@ -66,7 +66,7 @@ class UserUnblock(GenericAPIView):
 
 
 class GetAllUsersView(GenericAPIView):
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser,)
 
     def get_queryset(self):
         return UserModel.objects.exclude(pk=self.request.user.pk)
@@ -74,3 +74,5 @@ class GetAllUsersView(GenericAPIView):
     def get(self, *args, **kwargs):
         serializer = UserSerializer(self.get_queryset(), many=True)
         return Response(serializer.data)
+
+
