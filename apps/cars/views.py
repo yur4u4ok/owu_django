@@ -1,3 +1,5 @@
+from core.permissions.is_superuser import IsAdminUser
+
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
@@ -17,6 +19,7 @@ class CarsGetPost(GenericAPIView):
 
 class CarRetrieveUpdateDelete(GenericAPIView):
     queryset = CarModel.objects.all()
+    permission_classes = (IsAdminUser,)
 
     def get(self, *args, **kwargs):
         car = self.get_object()
@@ -29,6 +32,17 @@ class CarRetrieveUpdateDelete(GenericAPIView):
 
         car = self.get_object()
         serializer = CarSerializer(car, data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data, status.HTTP_200_OK)
+
+    def patch(self, *args, **kwargs):
+        data = self.request.data
+
+        car = self.get_object()
+        serializer = CarSerializer(car, data, partial=True)
         serializer.is_valid(raise_exception=True)
 
         serializer.save()

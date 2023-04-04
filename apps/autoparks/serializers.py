@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import AutoParkModel
 from ..cars.serializers import CarSerializer
+from .models import AutoParkModel
 
 
 class AutoParkSerializer(serializers.ModelSerializer):
@@ -9,5 +9,5 @@ class AutoParkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AutoParkModel
-        fields = ('id', 'name', 'cars', 'user')
+        fields = ('id', 'name', 'user', 'cars')
         read_only_fields = ('user',)
