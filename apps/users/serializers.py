@@ -41,4 +41,3 @@ class UserSerializer(ModelSerializer):
         EmailService.register_email(user)
         return user
 
-

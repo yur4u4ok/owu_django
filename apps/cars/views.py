@@ -1,20 +1,25 @@
 from core.permissions.is_superuser import IsAdminUser
 
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from .filters import CarFilter
 from .models import CarModel
 from .serializers import CarSerializer
 
 
-class CarsGetPost(GenericAPIView):
+class CarsListView(ListAPIView):
+    queryset = CarModel.objects.get_auto_park_by_id(2)
+    serializer_class = CarSerializer
+    filterset_class = CarFilter
 
-    @staticmethod
-    def get(self, *args, **kwargs):
-        car = CarModel.objects.all()
-        serializer = CarSerializer(car, many=True)
-        return Response(serializer.data, status.HTTP_200_OK)
+    # @staticmethod
+    # def get(*args, **kwargs):
+    #     car = CarModel.objects.all()
+    #     serializer = CarSerializer(car, many=True)
+    #     return Response(serializer.data, status.HTTP_200_OK)
 
 
 class CarRetrieveUpdateDelete(GenericAPIView):
