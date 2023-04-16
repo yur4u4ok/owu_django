@@ -8,12 +8,16 @@ djangorestframework = "*"
 mysqlclient = "*"
 djangorestframework-simplejwt = "*"
 pillow = "*"
-django-dotenv = "*"
 django-filter = "*"
+drf-yasg = "*"
+redis = "*"
+django-celery-results = "*"
+django-celery-beat = "*"
+celery = "*"
 
 [dev-packages]
 isort = "*"
 
 [requires]
 python_version = "3.11"
-python_full_version = "3.11.2"
+#python_full_version = "3.11.2"
